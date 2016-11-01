@@ -1,7 +1,7 @@
 {
   "name": "react-transform-boilerplate",
-  "version": "1.0.0",
-  "description": "A new Webpack boilerplate with hot reloading React components, and error handling on module and component level.",
+  "version": "0.1.0",
+  "description": "An example project to show off React and d3 working together.",
   "scripts": {
     "clean": "rimraf dist",
     "build:webpack": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
@@ -26,7 +26,7 @@
     "babel",
     "react-transform"
   ],
-  "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
+  "author": "Meghan Urback <urbackmk@gmail.com> (http://github.com/urbackmk)",
   "license": "CC0-1.0",
   "bugs": {
     "url": "https://github.com/gaearon/react-transform-boilerplate/issues"
@@ -51,7 +51,13 @@
     "webpack-hot-middleware": "^2.9.1"
   },
   "dependencies": {
+    "css-loader": "^0.25.0",
+    "d3": "^4.3.0",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "lodash": "^4.16.6",
     "react": "^0.14.7",
-    "react-dom": "^0.14.7"
+    "react-dom": "^0.14.7",
+    "style-loader": "^0.13.1"
   }
 }
