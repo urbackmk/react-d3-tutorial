@@ -35,7 +35,15 @@ class Toggle extends Component {
 
 class ControlRow extends Component {
     makePick(picked, newState) {
+        let toggleValues = this.state.toggleValues;
 
+        toggleValues = _.mapValues(toggleValues,
+                                   (value, key) => newState && key == picked);
+
+        // if newState is false, we want to reset
+        this.props.updateDataFilter(picked, !newState);
+
+        this.setState({toggleValues: toggleValues});
     }
 
     componentWillMount() {
@@ -77,6 +85,39 @@ class ControlRow extends Component {
 }
 
 class Controls extends Component {
+    componentDidUpdate() {
+        this.props.updateDataFilter(
+            ((filters) => {
+                return (d) =>  filters.yearFilter(d);
+            })(this.state)
+        );
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return !_.isEqual(this.state, nextState);
+    }
+
+    updateYearFilter(year, reset) {
+        let filter = (d) => d.submit_date.getFullYear() == year;
+
+        if (reset || !year) {
+            filter = () => true;
+            year = '*';
+        }
+
+        this.setState({yearFilter: filter,
+                       year: year});
+    }
+
+    constructor() {
+        super();
+
+        this.state = {
+            yearFilter: () => true,
+            year: '*',
+        };
+    }
+
     render() {
         let getYears = (data) => {
             return _.keys(_.groupBy(data,
@@ -88,7 +129,7 @@ class Controls extends Component {
             <div>
                 <ControlRow data={this.props.data}
                             getToggleNames={getYears}
-                            updateDataFilter={() => true} />
+                            updateDataFilter={this.updateYearFilter.bind(this)} />
             </div>
         )
     }
