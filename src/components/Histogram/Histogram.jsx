@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import d3 from 'd3';
+import './style.less';
 
 class HistogramBar extends Component {
     render() {
